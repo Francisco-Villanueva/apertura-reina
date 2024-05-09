@@ -1,10 +1,7 @@
-import { MercadoPagoButton } from "@/components/MercadoPagoButton";
-import { formatNumber } from "@/utils/formatNumber";
-import { Product } from "@/mock/product";
 import { useEffect, useState } from "react";
+import Background from "@/components/Background/Background";
+import { CarouselEvents } from "@/components/Carrousel/Carousel";
 import Image from "next/image";
-
-import styles from "@/styles/Home.module.scss";
 
 interface NotificationType {
   isOpen: boolean;
@@ -47,58 +44,39 @@ export default function Home() {
   }, []);
 
   return (
-    <main className={styles.container}>
-      <div className={styles.productContainer}>
-        <Image
-          src={Product.img}
-          alt={Product.title}
-          width={360}
-          height={450}
-          priority
-        />
-
-        <div className={styles.data}>
-          <div className={styles.top}>
-            <h2>{Product.title}</h2>
-            <h3>{formatNumber(Product.price)}</h3>
-          </div>
-
-          <div className={styles.center}>
-            <span>Lo que tenes que saber de este producto:</span>
-
-            <ul>
-              {Product.description.map((item) => (
-                <li key={item}>{item}</li>
-              ))}
-            </ul>
-          </div>
-
-          <div>
-            <MercadoPagoButton product={Product} />
-          </div>
+    <main
+      className={` h-[100vh] max-h-[100vh] w-[100vw] max-w-[100vw] overflow-hidden font-montserrat`}
+    >
+      <Background />
+      <nav className="h-[10vh] fixed top-0  w-full p-4">
+        <div className="h-full aspect-video relative">
+          <Image src="/reina/logo.png" fill alt="reina burguesa logo" />
         </div>
+      </nav>
+      <div className=" h-full flex items-center justify-center">
+        <CarouselEvents />
+        {/* 
+        {notification.isOpen && (
+          <div className={styles.notification}>
+            <div
+              className={styles.iconContainer}
+              style={{
+                backgroundColor:
+                  notification.type === "approved" ? "#00cc99" : "#ee4646",
+              }}
+            >
+              <Image
+                src={`/assets/${notification.type}.svg`}
+                alt={notification.type!}
+                width={25}
+                height={25}
+              />
+            </div>
+
+            <p>{notification.content}</p>
+          </div>
+        )} */}
       </div>
-
-      {notification.isOpen && (
-        <div className={styles.notification}>
-          <div
-            className={styles.iconContainer}
-            style={{
-              backgroundColor:
-                notification.type === "approved" ? "#00cc99" : "#ee4646",
-            }}
-          >
-            <Image
-              src={`/assets/${notification.type}.svg`}
-              alt={notification.type!}
-              width={25}
-              height={25}
-            />
-          </div>
-
-          <p>{notification.content}</p>
-        </div>
-      )}
     </main>
   );
 }

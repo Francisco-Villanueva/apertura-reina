@@ -2,8 +2,8 @@ import { useEffect, useState } from "react";
 import { IProduct } from "@/mock/product";
 import { Loader } from "../Loader";
 import axios from "axios";
-
-import styles from "./styles.module.scss";
+import { Button } from "../ui/button";
+import { useRouter } from "next/router";
 
 interface MercadoPagoButtonProps {
   product: IProduct;
@@ -12,6 +12,7 @@ interface MercadoPagoButtonProps {
 export const MercadoPagoButton = ({ product }: MercadoPagoButtonProps) => {
   const [url, setUrl] = useState<null | string>(null);
   const [loading, setLoading] = useState<boolean>(true);
+  const router = useRouter();
 
   useEffect(() => {
     const generateLink = async () => {
@@ -36,13 +37,15 @@ export const MercadoPagoButton = ({ product }: MercadoPagoButtonProps) => {
   return (
     <div>
       {loading ? (
-        <button className={styles.button} disabled>
+        <button className={""} disabled>
           <Loader />
         </button>
       ) : (
-        <a className={styles.button} href={url!}>
-          Comprar ahora
-        </a>
+        <div className="flex flex-col gap-1 ">
+          <Button variant={"secondary"} onClick={() => router.push(url!)}>
+            Comprar
+          </Button>
+        </div>
       )}
     </div>
   );

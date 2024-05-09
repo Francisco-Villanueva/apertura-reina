@@ -10,7 +10,6 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
 
   const topic = query.topic || query.type;
 
-  console.log({ query, topic });
   try {
     if (topic === "payment") {
       const paymentId = query.id || query["data.id"];
