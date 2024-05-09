@@ -54,7 +54,7 @@ export default function Home() {
       <div className=" h-full  ">
         <Landing />
 
-        <section className=" bg-foreground/85 h-full pt-[10vh] px-10 max-md:px-5   flex gap-4  justify-between ">
+        <section className=" bg-foreground/85 h-full pt-10 px-10 max-md:px-5   flex gap-4  justify-between ">
           <div className="w-3/4   max-lg:w-full h-full flex flex-col gap-4     ">
             <h2 className="text-secondary/60 font-semibold text-2xl">
               Eventos de apertura
