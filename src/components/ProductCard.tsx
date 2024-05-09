@@ -17,7 +17,7 @@ export default function ProductCard({ product }: { product: IProduct }) {
         </h5>
       </div>
 
-      <article className=" flex justify-between gap-4 items-start bg-primary rounded-md p-4 ml-6 border border-secondary/15 cursor-pointer hover:border-secondary transition-all duration-200 ">
+      <article className=" flex justify-between gap-4 items-start bg-primary rounded-md p-4  max-md:p-2 ml-6 max-md:ml-3 border border-secondary/15 cursor-pointer hover:border-secondary transition-all duration-200 ">
         <section
           className={
             "flex flex-col    font-semibold justify-between w-full gap-2  "
@@ -25,25 +25,27 @@ export default function ProductCard({ product }: { product: IProduct }) {
         >
           <header className={"flex flex-col justify-between "}>
             <div className="flex items-center gap-1 text-secondary/75">
-              <span className="text-secondary/75 text-sm">
+              <span className="text-secondary/75 text-sm max-md:text-xs">
                 {product.horario} -{" "}
               </span>
-              <h3 className="font-semibold text-md ">
+              <h3 className="font-semibold text-md  max-md:text-sm">
                 ${formatNumber(product.price)}
               </h3>
             </div>
-            <h2 className="font-semibold text-[25px] ">{product.title}</h2>
+            <h2 className="font-semibold text-[25px] max-md:text-[18px] ">
+              {product.title}
+            </h2>
           </header>
 
-          <div className="text-secondary/50 text-sm font-normal">
+          <div className="text-secondary/50 text-sm font-normal ">
             {product.subTitle}
           </div>
 
-          <div className="w-1/3 maxmd:w-full">
+          <div className="w-1/3 max-md:w-full">
             <MercadoPagoButton product={product} />
           </div>
         </section>
-        <div className="h-32 max-md:h-20  relative aspect-square opacity-75   ">
+        <div className="h-32 max-md:h-10  relative aspect-square opacity-75   ">
           <Image
             src={"/reina/RBlanca.png"}
             alt={product.title}
