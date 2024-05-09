@@ -35,18 +35,13 @@ export const MercadoPagoButton = ({ product }: MercadoPagoButtonProps) => {
   }, [product]);
 
   return (
-    <div>
-      {loading ? (
-        <button className={""} disabled>
-          <Loader />
-        </button>
-      ) : (
-        <div className="flex flex-col gap-1 ">
-          <Button variant={"secondary"} onClick={() => router.push(url!)}>
-            Comprar
-          </Button>
-        </div>
-      )}
-    </div>
+    <Button
+      variant={"secondary"}
+      onClick={() => router.push(url!)}
+      disabled={loading}
+      className=" w-full"
+    >
+      {loading ? <Loader /> : "Comprar"}
+    </Button>
   );
 };

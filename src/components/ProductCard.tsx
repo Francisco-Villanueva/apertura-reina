@@ -7,52 +7,52 @@ export default function ProductCard({ product }: { product: IProduct }) {
   return (
     <article
       className={
-        "flex flex-col justify-center   bg-primary text-white  px-6 py-10 rounded-xl relative  w-full h-full "
+        "flex flex-col justify-center   gap-4  text-secondary  relative  w-5/6 max-md:w-full border-l border-dashed py-4    "
       }
     >
-      <div className="h-56 absolute aspect-square opacity-15 m-auto ">
-        <Image
-          src={"/reina/RBlanca.png"}
-          alt={product.title}
-          fill
-          objectFit="contain"
-          priority
-        />
+      <div className="border h-2 aspect-square rounded-full absolute top-6 translate-x-[-50%] bg-secondary" />
+      <div className="flex justify-start ml-2">
+        <h5 className=" border px-4 rounded-xl font-semibold text-secondary bg-secondary/15 border-accent/25">
+          {product.date}
+        </h5>
       </div>
 
-      <section className={"flex flex-col gap-10  justify-between  "}>
-        <header className={"flex max-sm:flex-col justify-between "}>
-          <section className=" flex flex-co text-lg l items-start gap-2">
-            <div className="flex flex-col items-start gap-2">
-              <h2 className="font-semibold text-[25px]">{product.title}</h2>
-              <h5 className="text-sm bg-accent text-primary text-center font-bold px-4 py-1 rounded-2xl  ">
-                {product.date}
-              </h5>
+      <article className=" flex justify-between gap-4 items-start bg-primary rounded-md p-4 ml-6 border border-secondary/15 cursor-pointer hover:border-secondary transition-all duration-200 ">
+        <section
+          className={
+            "flex flex-col    font-semibold justify-between w-full gap-2  "
+          }
+        >
+          <header className={"flex flex-col justify-between "}>
+            <div className="flex items-center gap-1 text-secondary/75">
+              <span className="text-secondary/75 text-sm">
+                {product.horario} -{" "}
+              </span>
+              <h3 className="font-semibold text-md ">
+                ${formatNumber(product.price)}
+              </h3>
             </div>
-          </section>
-          <h3 className="font-semibold text-3xl max-md:text-xl   rounded-md">
-            ${formatNumber(product.price)}
-          </h3>
-        </header>
+            <h2 className="font-semibold text-[25px] ">{product.title}</h2>
+          </header>
 
-        <div>
-          <h6 className="  uppercase font-semibold max-md:text-sm ">
+          <div className="text-secondary/50 text-sm font-normal">
             {product.subTitle}
-          </h6>
-        </div>
+          </div>
 
-        <div className="flex flex-col gap-1 items-start w-full text-start text-sm  text-white/85  ">
-          {product.description.map((item) => (
-            <div className="flex items-start gap-1" key={item}>
-              - <p className=" ">{item}</p>
-            </div>
-          ))}
+          <div className="w-1/3 maxmd:w-full">
+            <MercadoPagoButton product={product} />
+          </div>
+        </section>
+        <div className="h-32 max-md:h-20  relative aspect-square opacity-75   ">
+          <Image
+            src={"/reina/RBlanca.png"}
+            alt={product.title}
+            fill
+            objectFit="contain"
+            priority
+          />
         </div>
-
-        <div>
-          <MercadoPagoButton product={product} />
-        </div>
-      </section>
+      </article>
     </article>
   );
 }
