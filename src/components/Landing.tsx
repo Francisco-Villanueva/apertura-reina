@@ -10,7 +10,7 @@ export default function Landing() {
         <div className="h-full  w-full  top-0 z-10   grid place-items-center  ">
           <div className=" w-5/6 flex flex-col gap-4  rounded-md p-8 max-md:px-0 ">
             <section className=" text-white text-xl ">
-              <p className="opacity-40">Que esta pasando en</p>
+              <p className="opacity-40">Qué esta pasando en</p>
               <p className="font-semibold text-3xl">Reina Burguesa</p>
             </section>
             <hr className="w-1/3" />
