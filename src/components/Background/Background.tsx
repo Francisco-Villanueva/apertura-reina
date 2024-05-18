@@ -4,8 +4,8 @@ import React from "react";
 export default function Background() {
   return (
     <div className="absolute top-0 h-full w-full bg-foreground -z-10  ">
-      <div className="w-40 aspect-square bg-black absolute rounded-br-full top-0 left-0 max-md:opacity-100">
-        <div className="relative w-3/4 aspect-square  bottom-0   ">
+      <div className="w-40 aspect-square  absolute rounded-br-full top-0 left-0 max-md:opacity-100 ">
+        <div className="relative w-3/4 aspect-square     ">
           <Image
             src="/reina/RBlanca.png"
             alt="Reina burguesa "

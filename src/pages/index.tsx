@@ -4,6 +4,9 @@ import Image from "next/image";
 import ProductCard from "@/components/ProductCard";
 import { products } from "@/mock/product";
 import Landing from "@/components/Landing";
+import { PaymenySuccess } from "@/components/Notification";
+import { PaymentForm } from "@/components/Forms";
+import { Payment } from "@/types/payment.types";
 
 interface NotificationType {
   isOpen: boolean;
@@ -21,7 +24,6 @@ export default function Home() {
   useEffect(() => {
     const urlParams = new URLSearchParams(window.location.search);
     const status = urlParams.get("status");
-
     if (status === "approved") {
       setNotification({
         content: "Pago aprobado!",
@@ -35,33 +37,26 @@ export default function Home() {
         type: "failure",
       });
     }
-
-    setTimeout(() => {
-      setNotification({
-        isOpen: false,
-        type: null,
-        content: "",
-      });
-    }, 5000);
   }, []);
 
   return (
     <main
-      className={` min-h-[100vh] h-[100vh]  max-w-[100vw] w-[100vw] overflow-x-hidden  font-montserrat `}
+      className={` min-h-[100vh] h-[100vh]  max-w-[100vw] w-[100vw] overflow-x-hidden  font-montserrat flex flex-col `}
     >
-      <Background />
+      <PaymenySuccess open={notification.isOpen} />
 
+      <Background />
       <div className=" h-full  ">
         <Landing />
 
-        <section className=" bg-foreground/85 h-full pt-10 px-10 max-md:px-5   flex gap-4  justify-between ">
+        <section className=" bg-foreground h-full pt-10 px-10 max-md:px-5   flex gap-4  justify-between ">
           <div className="w-3/4   max-lg:w-full h-full flex flex-col gap-4     ">
-            <h2 className="text-secondary/60 font-semibold text-2xl">
+            <h2 className="text-secondary font-semibold text-2xl">
               Eventos de apertura
             </h2>
 
             <div className="  max-h-[90%] overflow-auto max-md:px-2">
-              {products.map((product, index) => (
+              {products.map((product) => (
                 <ProductCard product={product} key={product.id} />
               ))}
             </div>

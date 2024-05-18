@@ -5,9 +5,9 @@ import Image from "next/image";
 
 export default function Landing() {
   return (
-    <section className="flex  h-full max-md:flex-col-reverse ">
+    <section className="flex  h-full max-md:flex-col-reverse  ">
       <div className="w-1/2   max-md:w-full  flex items-center  ">
-        <div className="h-full  w-full  top-0 z-10   grid place-items-center  ">
+        <div className="h-full  w-full  top-0 max-md:bg-foreground   grid place-items-center  ">
           <div className=" w-5/6 flex flex-col gap-4  rounded-md p-8 max-md:px-0 ">
             <section className=" text-white text-xl ">
               <p className="opacity-40">Qué esta pasando en</p>
