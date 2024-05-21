@@ -1,10 +1,10 @@
-import { IProduct } from "@/mock/product";
 import Image from "next/image";
 import React from "react";
 import { formatNumber } from "@/utils/formatNumber";
 import { ClientDataAside } from "./Aside";
+import { Event } from "@/types/event.types";
 interface ProductCardInterface {
-  product: IProduct;
+  product: Event;
   readonly?: boolean;
 }
 export default function ProductCard({

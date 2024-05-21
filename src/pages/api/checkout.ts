@@ -16,6 +16,12 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
     const URL = process.env.NEXT_NGROK_URL;
 
     try {
+      if (!payment.name || !product) {
+        throw new Error("Missing payment data");
+      }
+
+      const newPayment = await PaymentServices.createPayment(payment);
+
       const preference: CreatePreferencePayload = {
         items: [
           {
@@ -26,8 +32,8 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
         ],
         auto_return: "approved",
         back_urls: {
-          success: `${URL}/?reinaPaymenttId=${payment.id}`,
-          failure: `${URL}/?reinaPaymenttId=${payment.id}`,
+          success: `${URL}/?reinaPaymenttId=${newPayment.id}`,
+          failure: `${URL}/?reinaPaymenttId=${newPayment.id}`,
         },
         notification_url: `${URL}/api/notify`,
       };

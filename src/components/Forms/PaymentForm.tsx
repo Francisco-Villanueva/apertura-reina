@@ -12,25 +12,28 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
+import { eventStore, paymentStore } from "@/store";
+import { PaymentServices } from "@/services/PaymentServices";
 export function PaymentForm() {
+  const { setPayment, setPaymentStep, payment } = paymentStore();
+  const { selectedEvent } = eventStore();
+
   const form = useForm<z.infer<typeof PaymentZodSchema>>({
     resolver: zodResolver(PaymentZodSchema),
     defaultValues: {
-      amount: 0,
-      email: "",
-      method: "",
-      name: "",
-      paymentDate: "",
-      phone: "",
-      status: "Pending",
+      amount: selectedEvent?.price,
+      email: payment.email,
+      method: payment.method,
+      name: payment.name,
+      paymentDate: new Date().toLocaleString(),
+      phone: payment.phone,
+      status: payment.status,
     },
   });
 
   const onSubmit = (values: z.infer<typeof PaymentZodSchema>) => {
-    console.log("first");
-    // Do something with the form values.
-    // ✅ This will be type-safe and validated.
-    console.log(values);
+    setPayment(values);
+    setPaymentStep("next");
   };
   return (
     <Form {...form}>
@@ -43,7 +46,6 @@ export function PaymentForm() {
           name="name"
           render={({ field }) => (
             <FormItem>
-              {/* <FormLabel>Nombre</FormLabel> */}
               <FormControl>
                 <Input placeholder="Nombre y Apellido" {...field} />
               </FormControl>
@@ -56,7 +58,6 @@ export function PaymentForm() {
           name="email"
           render={({ field }) => (
             <FormItem>
-              {/* <FormLabel>Email</FormLabel> */}
               <FormControl>
                 <Input placeholder="Emai" type="email" {...field} />
               </FormControl>
@@ -69,7 +70,6 @@ export function PaymentForm() {
           name="phone"
           render={({ field }) => (
             <FormItem>
-              {/* <FormLabel>Celular</FormLabel> */}
               <FormControl>
                 <Input placeholder="Numero de telefono" {...field} />
               </FormControl>
@@ -77,25 +77,9 @@ export function PaymentForm() {
             </FormItem>
           )}
         />
-        <FormField
-          control={form.control}
-          name="paymentDate"
-          render={({ field }) => (
-            <FormItem>
-              {/* <FormLabel>Celular</FormLabel> */}
-              <FormControl>
-                <Input
-                  placeholder="Numero de telefono"
-                  type="date"
-                  {...field}
-                />
-              </FormControl>
-              <FormMessage />
-            </FormItem>
-          )}
-        />
+
         <Button type="submit" variant={"outline"}>
-          Cargar Datos
+          Continuar
         </Button>
       </form>
     </Form>
