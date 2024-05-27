@@ -6,8 +6,13 @@ const INIAL_STATUS_PAYMENT: Payment = {
   name: "",
   phone: "",
   status: "Pending",
+  dni: "",
+  EventId: "",
+  time: "",
 };
 interface IPaymentStore {
+  allPayments: Payment[];
+  setPayments: (payment: Payment[]) => void;
   payment: Payment;
   paymentStep: number;
   setPaymentStep: (step: "next" | "prev") => void;
@@ -15,6 +20,8 @@ interface IPaymentStore {
 }
 export const paymentStore = create<IPaymentStore>((set) => ({
   payment: INIAL_STATUS_PAYMENT,
+  allPayments: [],
+  setPayments: (allPayments) => set(() => ({ allPayments })),
   paymentStep: 0,
   setPaymentStep: (step) =>
     set(({ paymentStep }) => {

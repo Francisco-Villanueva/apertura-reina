@@ -13,19 +13,38 @@ export default function ProductCard({
 }: ProductCardInterface) {
   return (
     <article
-      className={`flex flex-col justify-center   gap-4  text-secondary  relative   ${
+      className={`flex flex-col justify-center    gap-4  text-secondary  relative   ${
         readonly
           ? " w-full "
-          : " border-l border-dashed py-4   w-5/6 max-md:w-full "
+          : " border-l border-dashed py-4   w-5/6 max-lg:w-full "
       }  `}
     >
       {!readonly && (
         <div className="border h-2 aspect-square rounded-full absolute top-6 translate-x-[-50%] bg-secondary" />
       )}
-      <div className="flex justify-start ml-2">
-        <h5 className=" border px-4 rounded-xl font-semibold text-secondary bg-secondary/15 border-accent/25">
+      <div className="flex justify-start ml-2 gap-2">
+        <h5 className=" border px-4 rounded-xl  flex items-center font-semibold text-secondary bg-secondary/15 border-accent/25">
           {product.date}
         </h5>
+        <span className="  flex gap-2 p-2 rounded-sm items-center  text-sm text-secondary  bg-secondary/10">
+          Tickets Restantes
+          <h5 className="  font-bold ">{product.availables}</h5>
+          <div className="flex items-center gap-4">
+            {product.event.map(({ time, availables }) => (
+              <div
+                className="flex flex-col  border border-accent/20 rounded-sm "
+                key={time}
+              >
+                <p className="text-secondary/50 text-sm max-md:text-xs px-2 ">
+                  {time}
+                </p>
+                <span className="bg-accent text-primary text-center font-semibold  ">
+                  {availables}
+                </span>
+              </div>
+            ))}
+          </div>
+        </span>
       </div>
 
       <article
@@ -42,9 +61,6 @@ export default function ProductCard({
         >
           <header className={"flex flex-col justify-between "}>
             <div className="flex items-center gap-1 text-secondary/75">
-              <span className="text-secondary/75 text-sm max-md:text-xs">
-                {product.horario} -{" "}
-              </span>
               <h3 className="font-semibold text-md  max-md:text-sm">
                 ${formatNumber(product.price)}
               </h3>

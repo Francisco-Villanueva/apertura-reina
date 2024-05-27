@@ -4,6 +4,7 @@ const nextConfig = {
   images: {
     domains: ["http2.mlstatic.com", "encrypted-tbn0.gstatic.com"],
   },
+  
 };
 
 module.exports = nextConfig;

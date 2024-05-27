@@ -6,10 +6,14 @@ export type PaymentStatus = (typeof PAYMENT_STATUSES)[number];
 
 export const PaymentZodSchema = z.object({
   id: z.string().optional(),
-  status: z.enum(PAYMENT_STATUSES),
-  name: z.string(),
+  status: z.enum(PAYMENT_STATUSES).optional(),
+  name: z.string().min(3),
   email: z.string().email(),
-  phone: z.string(),
+  phone: z.string().min(8),
+  dni: z.string().min(7),
+  time: z.string(),
+  EventId: z.string().optional(),
+  confirmAsist: z.string().optional(),
   method: z.string().optional(),
   paymentDate: z.string().optional(),
   amount: z.number().optional(),

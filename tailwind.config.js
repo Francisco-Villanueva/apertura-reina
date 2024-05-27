@@ -23,6 +23,10 @@ module.exports = {
         'garamond': ['Garamond']
     },
       colors: {
+        black: "rgba(30,30,30)",
+        error: "#FA1048",
+        success: "#15CC8A",
+        pending: "#FFE9AF",
         reina:{
           red:"#AC1917",
           yellow:"#D7BEA1"

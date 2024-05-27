@@ -11,7 +11,7 @@ export const MercadoPagoButton = () => {
   const router = useRouter();
 
   const { payment } = paymentStore();
-  const { selectedEvent } = eventStore();
+  const { selectedEvent, selectedTime } = eventStore();
 
   const handleCheckout = async () => {
     setLoading(true);
@@ -20,11 +20,11 @@ export const MercadoPagoButton = () => {
       const { data: preference } = await axios.post("/api/checkout", {
         product: selectedEvent,
         payment,
+        time: selectedTime,
       });
 
       router.push(preference.url!);
     } catch (error) {
-      console.log("falla el API CHECKOUT", { error });
       console.error(error);
     } finally {
       setLoading(false);
@@ -33,10 +33,10 @@ export const MercadoPagoButton = () => {
 
   return (
     <Button
-      variant={"secondary"}
+      // variant={"secondary"}
       onClick={handleCheckout}
       disabled={!payment || !selectedEvent?.title}
-      className=" w-full"
+      className=" w-full bg-[#4287F5]"
     >
       {loading ? <Loader /> : <span>Comprar</span>}
     </Button>
