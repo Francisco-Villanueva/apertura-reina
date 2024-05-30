@@ -118,6 +118,13 @@ export function PaymenySuccess({ open = false }: { open: boolean }) {
                 <h2 className="text-md font-semibold">Datos de la compra</h2>
                 <div className="flex flex-col gap-2  w-5/6 mx-auto">
                   <div className="flex justify-between ">
+                    <span>Cantidad de Entrada</span>
+                    <span className="font-semibold">
+                      {" "}
+                      {paymentDetails.quantity}
+                    </span>
+                  </div>
+                  <div className="flex justify-between ">
                     <span>Valor de Entrada</span>
                     <span className="font-semibold">
                       {" "}
