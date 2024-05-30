@@ -49,7 +49,10 @@ export function PaymentDetails({
           </div>
           <div className="flex justify-between ">
             <span>Valor de Entrada</span>
-            <span className="font-semibold"> $ {paymentDetails.amount}</span>
+            <span className="font-semibold">
+              {" "}
+              $ {paymentDetails.amount! * parseInt(paymentDetails.quantity)}
+            </span>
           </div>
           <div className="flex justify-between ">
             <span>Comprador</span>
