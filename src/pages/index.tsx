@@ -14,6 +14,7 @@ import {
   PhoneIcon,
   TimerIcon,
 } from "lucide-react";
+import { FrecuentsQuestions } from "@/components/Frecuents/FrecuentsQuestions";
 
 interface NotificationType {
   isOpen: boolean;
@@ -61,11 +62,13 @@ export default function Home() {
         <Background />
         <div className=" h-full  ">
           <Landing />
+          <FrecuentsQuestions />
           <section className=" bg-foreground h-full pt-10 px-10 max-md:px-2   flex gap-4  justify-between ">
             <div className="w-3/4   max-lg:w-full h-full flex flex-col gap-4      ">
-              <h2 className="text-secondary font-semibold text-2xl">
+              <h2 className="text-secondary font-medium text-2xl">
                 Eventos de apertura
               </h2>
+
               <EventList />
             </div>
             <div className="w-1/4  max-lg:hidden transition-all duration-300 p-1 ">

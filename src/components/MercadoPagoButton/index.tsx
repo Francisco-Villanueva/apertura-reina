@@ -36,9 +36,9 @@ export const MercadoPagoButton = () => {
       // variant={"secondary"}
       onClick={handleCheckout}
       disabled={!payment || !selectedEvent?.title}
-      className=" w-full bg-[#4287F5]"
+      className=" w-full bg-[#4287F5] hover:bg-[#4287F5]/85"
     >
-      {loading ? <Loader /> : <span>Comprar</span>}
+      {loading ? <Loader /> : <span>Confirmar Compra</span>}
     </Button>
   );
 };

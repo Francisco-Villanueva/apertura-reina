@@ -83,6 +83,11 @@ export const columns: ColumnDef<Payment>[] = [
     cell: ({ getValue }) => <EventDetail eventId={getValue<string>()} />,
   },
   {
+    accessorKey: "time",
+    header: "Horario",
+    cell: ({ getValue }) => <div>{getValue<string>()}</div>,
+  },
+  {
     accessorKey: "email",
     header: "Email",
   },
@@ -118,7 +123,6 @@ export const columns: ColumnDef<Payment>[] = [
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
             <Button variant="ghost" className="h-8 w-8 p-0">
-              <span className="sr-only">Open menu</span>
               <MoreHorizontal className="h-4 w-4" />
             </Button>
           </DropdownMenuTrigger>

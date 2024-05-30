@@ -19,6 +19,13 @@ import {
 
 import { Input } from "@/components/ui/input";
 import React from "react";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[];
   data: TData[];
@@ -46,16 +53,38 @@ export function DataTable<TData, TValue>({
 
   return (
     <div>
-      <div className="flex items-center py-4">
+      <div className="flex items-center py-4 gap-2">
         <Input
           variant="secondary"
-          placeholder="DNI"
+          placeholder="Buscar por DNI"
           value={(table.getColumn("dni")?.getFilterValue() as string) ?? ""}
           onChange={(event) =>
             table.getColumn("dni")?.setFilterValue(event.target.value)
           }
           className="max-w-sm border"
         />
+        <Select
+          onValueChange={(timeValue) =>
+            table.getColumn("time")?.setFilterValue(timeValue)
+          }
+        >
+          <SelectTrigger className="w-[350px]">
+            <SelectValue placeholder="Horario" />
+          </SelectTrigger>
+          <SelectContent>
+            {[" ", "20:30 - 21:30", "21:30 - 22:30", "22:30 - 23:30"].map(
+              (time) => (
+                <SelectItem
+                  value={time}
+                  className="flex cursor-pointer "
+                  key={time}
+                >
+                  <span className="font-semibold mr-1">🗓️ {time}</span>
+                </SelectItem>
+              )
+            )}
+          </SelectContent>
+        </Select>
       </div>
       <div className="rounded-md border bg-[rgba(230,230,230)]">
         <Table>

@@ -13,7 +13,7 @@ export function PaymentDetails({
       <div className="flex flex-col gap-2  w-full">
         <h2 className="text-xl font-bold ">{selectedEvent?.title}</h2>
         <h2 className="text-md font- ">
-          📌 Fuerte Argentino 550, Bahía Blanca
+          📌 Fuerte Argentino 285, Bahía Blanca
         </h2>
 
         <div className="grid grid-cols-2 grid-rows-2  gap-2 p-4 ">

@@ -11,16 +11,18 @@ import {
 import { EventServices, PaymentServices } from "@/services";
 import { Payment } from "@/types/payment.types";
 import Image from "next/image";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Loader } from "../Loader";
-import { eventStore } from "@/store";
 import { Event } from "@/types/event.types";
 import { useRouter } from "next/navigation";
+import html2canvas from "html2canvas";
+import jsPDF from "jspdf";
 
 export function PaymenySuccess({ open = false }: { open: boolean }) {
   const [paymentDetails, setPaymentDetails] = useState<Payment>();
   const [eventDetails, setEventDetails] = useState<Event>();
   const router = useRouter();
+  const ticketRef = useRef<HTMLDivElement>(null);
   useEffect(() => {
     const urlParams = new URLSearchParams(window.location.search);
     const reinaPaymenttId = urlParams.get("reinaPaymenttId");
@@ -41,9 +43,25 @@ export function PaymenySuccess({ open = false }: { open: boolean }) {
       });
     }
   }, []);
+
+  const handleDownloadAsPDF = async () => {
+    if (ticketRef.current) {
+      const canvas = await html2canvas(ticketRef.current);
+      const imgData = canvas.toDataURL("image/png");
+      const pdf = new jsPDF();
+      const imgProps = pdf.getImageProperties(imgData);
+      const pdfWidth = pdf.internal.pageSize.getWidth();
+      const pdfHeight = (imgProps.height * pdfWidth) / imgProps.width;
+      pdf.addImage(imgData, "PNG", 0, 0, pdfWidth, pdfHeight);
+      pdf.save("ticket.pdf");
+    }
+  };
   return (
     <Sheet open={open}>
-      <SheetContent className="w-1/2 max-md:w-full p-0 bg-primary border-none  flex flex-col   font-montserrat ">
+      <SheetContent
+        className="w-1/2 max-md:w-full p-0 bg-primary border-none  flex flex-col   font-montserrat "
+        ref={ticketRef}
+      >
         <SheetHeader className=" h-[20%] flex justify-center items-center p-0 bg-green-500  ">
           <SheetTitle className=" text-secondary text-2xl">
             Pago Confirmado
@@ -62,7 +80,9 @@ export function PaymenySuccess({ open = false }: { open: boolean }) {
           {paymentDetails ? (
             <div className="flex flex-col w-full gap-8 ">
               <section className="flex flex-col gap-2   w-full">
-                <h2 className="text-xl font-bold text-primary">Evento</h2>
+                <h2 className="text-xl font-bold text-primary">
+                  {eventDetails?.title}
+                </h2>
                 <h2 className="text-md font- text-primary">
                   📌 Fuerte Argentino 550, Bahía Blanca
                 </h2>
@@ -76,7 +96,9 @@ export function PaymenySuccess({ open = false }: { open: boolean }) {
                   </article>
                   <article className="flex flex-col   items-start justify-start  w-full flex-grow">
                     <span>Horario</span>
-                    <p className="text-primary font-semibold">20:00 - 23:00 </p>
+                    <p className="text-primary font-semibold">
+                      {paymentDetails.time}{" "}
+                    </p>
                   </article>
                   <article className="flex flex-col  items-start justify-start    w-full">
                     <span>Ticket ID</span>
@@ -150,10 +172,15 @@ export function PaymenySuccess({ open = false }: { open: boolean }) {
             <span className="opacity-75">reina burguesa ®️</span>
           </div>
         </SheetDescription>
-        <SheetFooter className="absolute bottom-0 w-full flex justify-center p-2  ">
-          <Button variant={"secondary"} className="w-5/6 mx-auto">
+        <SheetFooter className="absolute bottom-0 w-full flex flex-row justify-center p-2 z-10  ">
+          <Button
+            variant={"secondary"}
+            className="w-5/6 max-md:w-1/2 mx-auto"
+            onClick={handleDownloadAsPDF}
+          >
             ⬇️ Guardar Ticket ⬇️
           </Button>
+
           <Button
             variant={"destructive"}
             className="w-1/4 mx-auto "

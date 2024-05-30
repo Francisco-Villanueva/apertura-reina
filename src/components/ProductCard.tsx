@@ -13,29 +13,26 @@ export default function ProductCard({
 }: ProductCardInterface) {
   return (
     <article
-      className={`flex flex-col justify-center    gap-4  text-secondary  relative   ${
-        readonly
-          ? " w-full "
-          : " border-l border-dashed py-4   w-5/6 max-lg:w-full "
+      className={`flex flex-col justify-center     gap-4  text-secondary  relative   ${
+        readonly ? " w-full " : "  w-5/6 max-lg:w-full "
       }  `}
     >
-      {!readonly && (
+      {/* {!readonly && (
         <div className="border h-2 aspect-square rounded-full absolute top-6 translate-x-[-50%] bg-secondary" />
-      )}
-      <div className="flex justify-start ml-2 gap-2">
-        <h5 className=" border px-4 rounded-xl  flex items-center font-semibold text-secondary bg-secondary/15 border-accent/25">
+      )} */}
+      <div className="flex justify-start  gap-2 max-md:flex-col">
+        <h5 className=" border px-4 rounded-sm  flex items-center font-semibold text-secondary bg-secondary/15 border-accent/25">
           {product.date}
         </h5>
-        <span className="  flex gap-2 p-2 rounded-sm items-center  text-sm text-secondary  bg-secondary/10">
-          Tickets Restantes
-          <h5 className="  font-bold ">{product.availables}</h5>
-          <div className="flex items-center gap-4">
+        <div className="  flex gap-2 p-2 rounded-sm md:items-center   text-sm text-secondary  max-md:flex-col">
+          <span className="font-medium text-accent/40">Tickets Restantes</span>
+          <div className="flex items-center gap-4 max-md:gap-1 w-full max-md:justify-between">
             {product.event.map(({ time, availables }) => (
               <div
-                className="flex flex-col  border border-accent/20 rounded-sm "
+                className="flex flex-col  border border-accent/20 rounded-sm max-md:w-full"
                 key={time}
               >
-                <p className="text-secondary/50 text-sm max-md:text-xs px-2 ">
+                <p className="text-secondary/50 text-sm max-md:text-xs px-2 py-1 text-center">
                   {time}
                 </p>
                 <span className="bg-accent text-primary text-center font-semibold  ">
@@ -44,33 +41,33 @@ export default function ProductCard({
               </div>
             ))}
           </div>
-        </span>
+        </div>
       </div>
 
       <article
-        className={`flex justify-between gap-4 items-start bg-primary rounded-md p-4  max-md:p-2 ml-6 max-md:ml-3 border border-secondary/15 ${
-          readonly
-            ? "select-none"
-            : "cursor-pointer hover:border-secondary transition-all duration-200"
+        className={`flex justify-between gap-4 items-start bg-primary rounded-md p-4   max-md:p-2  border border-secondary/15 ${
+          readonly ? "select-none" : ""
         }  `}
       >
         <section
           className={
-            "flex flex-col    font-semibold justify-between w-full gap-2  "
+            "flex flex-col    font-semibold justify-between w-full gap-2   "
           }
         >
-          <header className={"flex flex-col justify-between "}>
+          <header
+            className={
+              "flex max-md:flex-row-reverse max-md:justify-end gap-2 md:flex-col md:justify-between text-[25px] max-md:text-[15px]  "
+            }
+          >
             <div className="flex items-center gap-1 text-secondary/75">
-              <h3 className="font-semibold text-md  max-md:text-sm">
+              <h3 className="font-medium   text-reina-yellow">
                 ${formatNumber(product.price)}
               </h3>
             </div>
-            <h2 className="font-semibold text-[25px] max-md:text-[18px] ">
-              {product.title}
-            </h2>
+            <h2 className="font-medium  ">{product.title}</h2>
           </header>
 
-          <div className="text-secondary/50 text-sm font-normal ">
+          <div className="text-secondary/50 text-xs font-normal   ">
             {product.subTitle}
           </div>
 
@@ -81,9 +78,9 @@ export default function ProductCard({
           )}
         </section>
         {!readonly && (
-          <div className="h-32 max-md:h-10  relative aspect-square opacity-75   ">
+          <div className="h-32 max-md:h-10  relative aspect-square opacity-75  ">
             <Image
-              src={"/reina/RBlanca.png"}
+              src={"/reina/RYellow.png"}
               alt={product.title}
               fill
               objectFit="contain"

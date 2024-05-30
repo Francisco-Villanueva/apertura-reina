@@ -22,11 +22,12 @@ import { Input } from "@/components/ui/input";
 import { eventStore, paymentStore } from "@/store";
 import { Label } from "@radix-ui/react-label";
 import { ReactNode } from "react";
+import ProductCard from "../ProductCard";
 
 const CustomLabel = ({ label }: { label: ReactNode }) => {
   return <Label className="text-accent/80">{label}</Label>;
 };
-export function PaymentForm() {
+export function PaymentForm({ closeForm }: { closeForm: () => void }) {
   const { setPayment, setPaymentStep, payment } = paymentStore();
   const { selectedEvent, setSelectedTime, selectedTime } = eventStore();
 
@@ -51,46 +52,14 @@ export function PaymentForm() {
     setPaymentStep("next");
   };
 
+  const availiableEventHours = selectedEvent?.event.filter(
+    (event) => event.availables > 0
+  );
+
   return (
     <Form {...form}>
       <form className="flex flex-col  justify-between items-center  h-full p-4">
         <div className="space-y-8 w-full mx-auto text-primary">
-          <FormField
-            control={form.control}
-            name="time"
-            render={({ field }) => (
-              <FormItem>
-                <CustomLabel label="Horario" />
-                <Select
-                  onValueChange={field.onChange}
-                  defaultValue={field.value}
-                >
-                  <FormControl>
-                    <SelectTrigger>
-                      <SelectValue placeholder="Elegir horario" />
-                    </SelectTrigger>
-                  </FormControl>
-                  <SelectContent>
-                    {selectedEvent?.event.map((event) => (
-                      <SelectItem
-                        key={event.time}
-                        value={event.time}
-                        className="font-montserrat flex"
-                      >
-                        <div className="flex flex-grow gap-4 items-center justify-between  w-50  ">
-                          <span>{event.time}</span>
-                          <span className="border px-1 bg-reina-red/50 rounded-md">
-                            {" "}
-                            {event.availables}
-                          </span>
-                        </div>
-                      </SelectItem>
-                    ))}
-                  </SelectContent>
-                </Select>
-              </FormItem>
-            )}
-          />
           <FormField
             control={form.control}
             name="name"
@@ -151,15 +120,62 @@ export function PaymentForm() {
             )}
           />
         </div>
+        <div className="w-full">
+          <FormField
+            control={form.control}
+            name="time"
+            render={({ field }) => (
+              <FormItem>
+                <CustomLabel label="Horario" />
+                <Select
+                  onValueChange={field.onChange}
+                  defaultValue={field.value}
+                >
+                  <FormControl>
+                    <SelectTrigger>
+                      <SelectValue placeholder="Elegir horario" />
+                    </SelectTrigger>
+                  </FormControl>
+                  <SelectContent>
+                    {availiableEventHours?.map((event) => (
+                      <SelectItem
+                        key={event.time}
+                        value={event.time}
+                        className="font-montserrat flex"
+                      >
+                        <div className="flex flex-grow gap-4 items-center justify-between  w-50  ">
+                          <span>{event.time}</span>
+                          <span className="border px-1 bg-reina-red/50 rounded-md">
+                            {" "}
+                            {event.availables}
+                          </span>
+                        </div>
+                      </SelectItem>
+                    ))}
+                  </SelectContent>
+                </Select>
+              </FormItem>
+            )}
+          />
+        </div>
 
-        <Button
-          onClick={onSubmit}
-          variant={"outline"}
-          className="w-5/6 "
-          disabled={!form.formState.isValid}
-        >
-          Continuar
-        </Button>
+        <section className="flex items-center w-full gap-2">
+          <Button
+            onClick={onSubmit}
+            variant={"outline"}
+            className="w-5/6 "
+            disabled={!form.formState.isValid}
+          >
+            Continuar
+          </Button>
+          <Button
+            onClick={closeForm}
+            variant={"default"}
+            className="w-1/3 border "
+          >
+            volver
+          </Button>
+        </section>
       </form>
     </Form>
   );

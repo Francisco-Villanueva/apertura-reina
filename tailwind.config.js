@@ -17,6 +17,20 @@ module.exports = {
       },
     },
     extend: {
+      keyframes: {
+        "accordion-down": {
+          from: { height: "0" },
+          to: { height: "var(--radix-accordion-content-height)" },
+        },
+        "accordion-up": {
+          from: { height: "var(--radix-accordion-content-height)" },
+          to: { height: "0" },
+        },
+      },
+      animation: {
+        "accordion-down": "accordion-down 0.2s ease-out",
+        "accordion-up": "accordion-up 0.2s ease-out",
+      },
       fontFamily: {
         'montserrat': ['Montserrat'],
         'lato': ['Lato'],
@@ -28,8 +42,8 @@ module.exports = {
         success: "#15CC8A",
         pending: "#FFE9AF",
         reina:{
-          red:"#AC1917",
-          yellow:"#D7BEA1"
+          red:"#A1213A",
+          yellow:"#F49F17"
         },
         input: "hsl(var(--input))",
         ring: "hsl(var(--ring))",

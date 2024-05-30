@@ -13,13 +13,22 @@ import { eventStore, paymentStore } from "@/store";
 import { Event } from "@/types/event.types";
 import { MercadoPagoButton } from "../MercadoPagoButton";
 import { PaymentDetails } from "../Payments";
+import { useState } from "react";
 export function ClientDataAside({ product }: { product: Event }) {
   const { setSelectedEvent, selectedEvent } = eventStore();
   const { paymentStep, payment, setPaymentStep } = paymentStore();
+  const [sheetOpen, setSheetOpen] = useState(false);
+  const handleOpen = () => {
+    setSheetOpen(true);
+    setSelectedEvent(product);
+  };
   return (
-    <Sheet>
+    <Sheet open={sheetOpen}>
       <SheetTrigger>
-        <Button variant={"secondary"} onClick={() => setSelectedEvent(product)}>
+        <Button
+          onClick={handleOpen}
+          className="bg-reina-yellow text-white hover:bg-reina-yellow/85"
+        >
           Comprar
         </Button>
       </SheetTrigger>
@@ -40,20 +49,22 @@ export function ClientDataAside({ product }: { product: Event }) {
             )}
           </SheetTitle>
         </SheetHeader>
-        <SheetDescription className="flex flex-col  h-full   gap-4 px-6">
+        <SheetDescription className="flex flex-col  h-full   gap-4 px-6 max-md:px-2">
           <div className="w-full h-full">
-            {paymentStep === 0 && <PaymentForm />}
+            {paymentStep === 0 && (
+              <PaymentForm closeForm={() => setSheetOpen(false)} />
+            )}
             {paymentStep === 1 && (
               <div className="flex flex-col justify-between  h-full">
-                <div className="px-4 flex-grow flex flex-col">
+                <div className="px-4 max-md:px-0 flex-grow flex flex-col">
                   <span className="italic">Detalles de la compra</span>
-                  <div className="rounded-lg flex-grow  text-secondary ">
+                  <div className="rounded-lg flex-grow  text-secondary  ">
                     <PaymentDetails paymentDetails={payment} />
                   </div>
                 </div>
-                <span className="w-full m-auto  text-md text-secondary ">
-                  ⚠️Por favor respetar los horarios, por la capacidad del lugar
-                  ⚠️
+                <span className="w-full m-auto  text-md text-secondary text-center  ">
+                  ⚠️Por favor respetar los horarios, por la capacidad del
+                  lugar⚠️
                 </span>
                 <div className="w-full flex justify-center p-2 gap-2 ">
                   <MercadoPagoButton />

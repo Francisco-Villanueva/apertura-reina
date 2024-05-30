@@ -1,35 +1,58 @@
-import React from "react";
-import { Input } from "./ui/input";
-import { Button } from "./ui/button";
+import { MapPinIcon } from "lucide-react";
 import Image from "next/image";
-
 export default function Landing() {
   return (
     <section className="flex  h-full max-md:flex-col-reverse  ">
       <div className="w-1/2   max-md:w-full  flex items-center  ">
         <div className="h-full  w-full  top-0 max-md:bg-foreground   grid place-items-center  ">
           <div className=" w-5/6 flex flex-col gap-4  rounded-md p-8 max-md:px-0 ">
-            <section className=" text-white text-xl ">
-              <p className="font-semibold text-3xl">Apertura Gitana 💃</p>
+            <section className=" text-white  ">
+              <p className="font-bold text-3xl text-accent/80 text-reina-yellow">
+                Lo Logramos
+              </p>
+              <p className="font-medium italic text-sm text-accent/80 ">
+                Bienvenidos a nuestra primer apertura
+              </p>
             </section>
-            <hr className="w-1/3" />
-            <section className="text-white/50 w-5/6  max-md:w-full text-justify">
+            {/* <hr className="w-1/3" /> */}
+            <section className="text-accent/50 w-5/6  max-md:w-full text-justify text-sm">
               <span>
-                El miércoles{" "}
-                <strong>5 de junio abrimos nuestras puertas 🎉.</strong> Se
-                viene una inauguración bien gitana, así que andá comprando tu
-                ticket, no te quedes afuera que está fresco.
+                El martes{" "}
+                <strong>4 de junio abrimos nuestras puertas 🎉</strong> para la
+                familia.
               </span>
               <br />
               <br />
               <span>
-                El ticket es válido por{" "}
-                <strong>
-                  una burger doble a elección 🍔 + papas 🍟 y unas botellita de
-                  agua 💧.
-                </strong>{" "}
-                Vas a encotrar 3 franjas horarios, elegí la que más te guste y
-                venite a disfrutar una buena burgerbicampeona ⭐⭐.
+                A partir del miercoles <strong>5 de junio</strong> los esperamos
+                en el local para poder disfrutar de una reina recien hecha.
+              </span>
+              <br />
+              <br />
+
+              <span>
+                El local cuenta con 24 lugares, por eso dividimos en 3 franjas
+                horarias, elegí la que mas te guste y sacá tu ticket. El ticket
+                incluye una burger doble, papas y bebida ¿Puedo elegir? Si, todo
+                es a elección.
+              </span>
+
+              <br />
+              <br />
+              <br />
+
+              <span className="text-accent/80   ">
+                Necesitamos que respeten los horarios, por la capacidad del
+                local.
+              </span>
+              <br />
+              <br />
+              {/* Te esperamos en */}
+              <span className="text-reina-yellow font-semibold   ">
+                <span className="flex gap-1 ">
+                  <MapPinIcon className="w-4" />
+                  Fuerte Argentino 285
+                </span>
               </span>
             </section>
           </div>
@@ -38,7 +61,7 @@ export default function Landing() {
       <div className="w-1/2 h-full max-md:w-full relative">
         <div className="h-full  w-full absolute top-0 -z-10  opacity-50">
           <Image
-            src={"/reina/Bluecheese.jpg"}
+            src={"/landing3.jpg"}
             fill
             objectFit="cover"
             alt="blueCheese reina burguesa"
