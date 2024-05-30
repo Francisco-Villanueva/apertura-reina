@@ -9,6 +9,7 @@ const INIAL_STATUS_PAYMENT: Payment = {
   dni: "",
   EventId: "",
   time: "",
+  quantity: "",
 };
 interface IPaymentStore {
   allPayments: Payment[];

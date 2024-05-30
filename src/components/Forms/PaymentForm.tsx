@@ -42,8 +42,9 @@ export function PaymentForm({ closeForm }: { closeForm: () => void }) {
       paymentDate: new Date().toLocaleString(),
       phone: payment.phone,
       status: payment.status,
-      time: selectedTime,
       dni: payment.dni,
+      time: selectedTime,
+      quantity: payment.quantity,
     },
   });
   const onSubmit = () => {
@@ -55,6 +56,16 @@ export function PaymentForm({ closeForm }: { closeForm: () => void }) {
   const availiableEventHours = selectedEvent?.event.filter(
     (event) => event.availables > 0
   );
+
+  let TICKETS_QUANTITY: string[];
+  if (form.getValues().time) {
+    const avialblesByTime = selectedEvent?.event.filter(
+      (event) => event.time === form.getValues().time
+    )[0].availables;
+    TICKETS_QUANTITY = ["1", "2", "3", "4"].filter(
+      (value) => parseInt(value) <= avialblesByTime!
+    );
+  }
 
   return (
     <Form {...form}>
@@ -120,7 +131,7 @@ export function PaymentForm({ closeForm }: { closeForm: () => void }) {
             )}
           />
         </div>
-        <div className="w-full">
+        <div className="w-full flex flex-col gap-4 ">
           <FormField
             control={form.control}
             name="time"
@@ -157,6 +168,40 @@ export function PaymentForm({ closeForm }: { closeForm: () => void }) {
               </FormItem>
             )}
           />
+          {form.getValues().time && (
+            <FormField
+              control={form.control}
+              name="quantity"
+              render={({ field }) => (
+                <FormItem>
+                  <CustomLabel label="Canitdad de tickets" />
+                  <Select
+                    onValueChange={field.onChange}
+                    // defaultValue={field.value.toString()}
+                  >
+                    <FormControl>
+                      <SelectTrigger>
+                        <SelectValue placeholder="Seleccion la cantidad de tickets a comprar" />
+                      </SelectTrigger>
+                    </FormControl>
+                    <SelectContent>
+                      {TICKETS_QUANTITY?.map((quantity) => (
+                        <SelectItem
+                          key={quantity}
+                          value={quantity}
+                          className="font-montserrat flex"
+                        >
+                          <div className="flex flex-grow gap-4 items-center justify-between  w-50  ">
+                            <span>{quantity}</span>
+                          </div>
+                        </SelectItem>
+                      ))}
+                    </SelectContent>
+                  </Select>
+                </FormItem>
+              )}
+            />
+          )}
         </div>
 
         <section className="flex items-center w-full gap-2">

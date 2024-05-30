@@ -12,6 +12,7 @@ export const PaymentZodSchema = z.object({
   phone: z.string().min(8),
   dni: z.string().min(7),
   time: z.string().min(1),
+  quantity: z.string(),
   EventId: z.string().optional(),
   confirmAsist: z.string().optional(),
   method: z.string().optional(),

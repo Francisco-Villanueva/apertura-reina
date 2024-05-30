@@ -88,6 +88,15 @@ export const columns: ColumnDef<Payment>[] = [
     cell: ({ getValue }) => <div>{getValue<string>()}</div>,
   },
   {
+    accessorKey: "quantity",
+    header: "Cantidad",
+    cell: ({ getValue }) => (
+      <span className=" text-center w-1/2 mx-auto text-[16px]  flex justify-center rounded-md text-reina-yellow font-bold bg-reina-red py-1">
+        {getValue<string>()}
+      </span>
+    ),
+  },
+  {
     accessorKey: "email",
     header: "Email",
   },

@@ -1,8 +1,7 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import axios from "axios";
 import { Button } from "../ui/button";
 import { useRouter } from "next/router";
-import { Event } from "@/types/event.types";
 import { eventStore, paymentStore } from "@/store";
 import { Loader } from "../Loader";
 

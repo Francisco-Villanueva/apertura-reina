@@ -32,7 +32,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
           items: [
             {
               title: event.title,
-              unit_price: event.price,
+              unit_price: event.price * parseInt(payment.quantity),
               quantity: 1,
             },
           ],
