@@ -85,6 +85,26 @@ export function DataTable<TData, TValue>({
             )}
           </SelectContent>
         </Select>
+        <Select
+          onValueChange={(timeValue) =>
+            table.getColumn("status")?.setFilterValue(timeValue)
+          }
+        >
+          <SelectTrigger className="w-[350px]">
+            <SelectValue placeholder="Estado del pago" />
+          </SelectTrigger>
+          <SelectContent>
+            {["Pending", "Approved", "Refused"].map((time) => (
+              <SelectItem
+                value={time}
+                className="flex cursor-pointer "
+                key={time}
+              >
+                <span className="font-semibold mr-1">🗓️ {time}</span>
+              </SelectItem>
+            ))}
+          </SelectContent>
+        </Select>
       </div>
       <div className="rounded-md border bg-[rgba(230,230,230)]">
         <Table>

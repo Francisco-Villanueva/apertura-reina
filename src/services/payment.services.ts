@@ -15,6 +15,12 @@ export class PaymentServices {
     const response = await axios.post(`${API_URL}/payment`, { payment, time });
     return response.data;
   }
+  static async restorePayment(paymentId: string) {
+    const response = await axios.post(`${API_URL}/payment/restore`, {
+      paymentId,
+    });
+    return response.data;
+  }
   static async deletePayment(paymentId: string) {
     const response = await axios.post(`${API_URL}/payment/delete`, {
       id: paymentId,

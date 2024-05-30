@@ -4,11 +4,12 @@ import { Button } from "../ui/button";
 import { useRouter } from "next/router";
 import { eventStore, paymentStore } from "@/store";
 import { Loader } from "../Loader";
+import { useToast } from "../ui/use-toast";
 
 export const MercadoPagoButton = () => {
   const [loading, setLoading] = useState<boolean>(false);
   const router = useRouter();
-
+  const { toast } = useToast();
   const { payment } = paymentStore();
   const { selectedEvent, selectedTime } = eventStore();
 
@@ -24,6 +25,43 @@ export const MercadoPagoButton = () => {
 
       router.push(preference.url!);
     } catch (error) {
+      toast({
+        title: "Error en la compra",
+        description: (
+          <div>
+            <span className="font-semibold">Posibles razones</span>
+            <ol className="pl-2 italic text-xs ">
+              <li>🕓 Este ticket ya no se encuntra disponible.</li>
+              <li>
+                🗓️ La cantidad de entradas solicitadas supera la cantidad de
+                entradas disponibles.
+              </li>
+            </ol>
+
+            <br />
+            <hr />
+            <br />
+
+            <div className="flex justify-between w-full">
+              <span className="py-1">Vuelve al inicio y pruebe nuevamente</span>
+
+              <Button
+                variant={"destructive"}
+                size={"sm"}
+                onClick={() => {
+                  console.log("volver");
+                  router.push("/");
+                  location.reload();
+                }}
+              >
+                vovler
+              </Button>
+            </div>
+          </div>
+        ),
+        variant: "destructive",
+      });
+      // alert("fallo el pago");
       console.error(error);
     } finally {
       setLoading(false);

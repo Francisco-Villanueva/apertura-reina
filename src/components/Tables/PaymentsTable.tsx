@@ -17,6 +17,7 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { PaymentServices } from "@/services";
+import { PaymentActions } from "./components";
 
 function PaymenStatus({ status }: { status: PaymentStatus }) {
   const style: Record<PaymentStatus, string> = {
@@ -43,8 +44,10 @@ function PriceFormat({ amount }: { amount: number }) {
 }
 
 const handleDeltePayment = (paymentId?: string) => {
-  PaymentServices.deletePayment(paymentId || "").then(() => {
-    setTimeout(() => location.reload(), 500);
+  PaymentServices.restorePayment(paymentId || "").then((res) => {
+    PaymentServices.deletePayment(paymentId || "").then(() => {
+      setTimeout(() => location.reload(), 500);
+    });
   });
 };
 export const columns: ColumnDef<Payment>[] = [
@@ -114,10 +117,20 @@ export const columns: ColumnDef<Payment>[] = [
     cell: ({ getValue }) => <PriceFormat amount={getValue<number>()} />,
   },
   {
-    accessorKey: "method",
-    header: "Method",
-    cell: ({ getValue }) => <span className="">{getValue<string>()}</span>,
+    accessorKey: "confirmAsist",
+    header: "Asistencia",
+    cell: ({ getValue }) => (
+      <div className="flex items-center gap-2 w-full justify-center">
+        <Checkbox checked={getValue<boolean>()} />
+        <span className="font-bold">{getValue<boolean>() ? "SI" : "NO"}</span>
+      </div>
+    ),
   },
+  // {
+  //   accessorKey: "method",
+  //   header: "Method",
+  //   cell: ({ getValue }) => <span className="">{getValue<string>()}</span>,
+  // },
   {
     accessorKey: "paymentDate",
     header: "Payment Date",
@@ -128,31 +141,7 @@ export const columns: ColumnDef<Payment>[] = [
     cell: ({ row }) => {
       const payment = row.original;
 
-      return (
-        <DropdownMenu>
-          <DropdownMenuTrigger asChild>
-            <Button variant="ghost" className="h-8 w-8 p-0">
-              <MoreHorizontal className="h-4 w-4" />
-            </Button>
-          </DropdownMenuTrigger>
-          <DropdownMenuContent align="end">
-            <DropdownMenuLabel>Actions</DropdownMenuLabel>
-            <DropdownMenuSeparator />
-            <DropdownMenuItem
-              onClick={() => handleDeltePayment(payment.id)}
-              className="font-semibold flex gap-1 items-center cursor-pointer"
-            >
-              <CheckIcon className="w-4 text-success" /> Confirmtar
-            </DropdownMenuItem>
-            <DropdownMenuItem
-              onClick={() => handleDeltePayment(payment.id)}
-              className="font-semibold flex gap-1 items-center cursor-pointer"
-            >
-              <Trash2Icon className="w-4 text-error" /> Canclear
-            </DropdownMenuItem>
-          </DropdownMenuContent>
-        </DropdownMenu>
-      );
+      return <PaymentActions payment={payment} />;
     },
   },
 ];

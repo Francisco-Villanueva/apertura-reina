@@ -191,7 +191,10 @@ export function PaymenySuccess({ open = false }: { open: boolean }) {
           <Button
             variant={"destructive"}
             className="w-1/4 mx-auto "
-            onClick={() => router.push("/")}
+            onClick={() => {
+              router.push("/");
+              setTimeout(() => location.reload(), 500);
+            }}
           >
             Cerrar
           </Button>

@@ -4,7 +4,6 @@ import { IProduct } from "@/mock/product";
 import mercadopago from "mercadopago";
 import { Payment } from "@/types/payment.types";
 import { PaymentServices } from "@/services";
-import { AxiosError, AxiosResponse } from "axios";
 import { Event } from "@/types/event.types";
 
 mercadopago.configure({
@@ -45,6 +44,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
         };
 
         const response = await mercadopago.preferences.create(preference);
+
         res.status(200).send({ url: response.body.init_point });
       } catch (error) {
         try {
@@ -63,7 +63,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
         res.status(500).json({ message: "Internal server error", error });
       }
     } catch (error) {
-      // console.error("Error creating payment:", error);
+      console.error("Error creating payment:", error);
       res.status(500).json({ message: "Internal server error", error });
     }
   } else {

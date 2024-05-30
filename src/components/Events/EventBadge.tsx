@@ -11,7 +11,7 @@ export function EventBadge({ event }: { event: Event }) {
     "bg-reina-red/50",
     "bg-reina-yellow/50",
   ];
-  console.log(events.find((event) => event.id));
+
   return (
     <div
       className={`px-4 py-1 rounded-sm   ${

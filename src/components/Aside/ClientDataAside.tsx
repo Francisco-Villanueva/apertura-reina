@@ -22,10 +22,13 @@ export function ClientDataAside({ product }: { product: Event }) {
     setSheetOpen(true);
     setSelectedEvent(product);
   };
+
+  const disabledBuy = product.event.filter((e) => e.availables > 0);
   return (
     <Sheet open={sheetOpen}>
       <SheetTrigger>
         <Button
+          disabled={disabledBuy.length === 0}
           onClick={handleOpen}
           className="bg-reina-yellow text-white hover:bg-reina-yellow/85"
         >

@@ -8,8 +8,6 @@ import Provider from "./Provider";
 import {
   Calendar,
   InstagramIcon,
-  LocateIcon,
-  MapIcon,
   MapPinIcon,
   PhoneIcon,
   TimerIcon,
@@ -53,6 +51,7 @@ export default function Home() {
     }
   }, []);
 
+  console.log(notification.isOpen);
   return (
     <Provider>
       <main
