@@ -122,9 +122,9 @@ export default function Home() {
           <section className="bg-black p-4 h-full  flex flex-col ">
             <div>
               <h2 className="font-semibold text-reina-yellow text-lg">Menú</h2>
-              <span className="text-accent/85">
-                Acá te dejamos nuestra carta para que puedas ver en detalle cada
-                una de neustras burgers
+              <span className="text-accent/85 font-light">
+                Acá te dejamos nuestra carta, para que puedas ver en detalle
+                cada una de nuestras burgers.
               </span>
             </div>
 
@@ -144,10 +144,10 @@ export default function Home() {
                     <InstagramIcon className="w-4" />
                     reina.burguesa
                   </div>
-                  <div className="flex gap-2">
+                  {/* <div className="flex gap-2">
                     <PhoneIcon className="w-4" />
                     291527575
-                  </div>
+                  </div> */}
                 </div>
               </div>
 

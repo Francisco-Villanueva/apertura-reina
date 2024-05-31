@@ -11,7 +11,7 @@ export default function Landing() {
                 Lo Logramos
               </p>
               <p className="font-medium italic text-sm text-accent/80 ">
-                Bienvenidos a nuestra primer apertura
+                Bienvenidos a nuestra primera apertura
               </p>
             </section>
             {/* <hr className="w-1/3" /> */}
@@ -24,17 +24,17 @@ export default function Landing() {
               <br />
               <br />
               <span>
-                A partir del miercoles <strong>5 de junio</strong> los esperamos
-                en el local para poder disfrutar de una reina recien hecha.
+                A partir del miércoles <strong>5 de junio</strong> los esperamos
+                en el local para poder disfrutar de una reina recién hecha.
               </span>
               <br />
               <br />
 
               <span>
-                El local cuenta con 24 lugares, por eso dividimos en 3 franjas
-                horarias, elegí la que mas te guste y sacá tu ticket. El ticket
-                incluye una burger doble, papas y bebida ¿Puedo elegir? Si, todo
-                es a elección.
+                El local cuenta con 24 lugares, por eso dividimos el miércoles y
+                jueves en tres franjas horarias, elegí la que más te guste y
+                sacá tu ticket. El mismo incluye una burger doble, papas y
+                bebida ¿Puedo elegir? Si, todo es a elección.
               </span>
 
               <br />

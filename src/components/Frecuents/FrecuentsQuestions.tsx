@@ -17,12 +17,13 @@ export function FrecuentsQuestions() {
       answer: "No, no seas goloso.",
     },
     {
-      question: "Y si no llego a comprar el ticket, ¿puedo consumir el local?",
+      question:
+        "Y si no llego a comprar el ticket, ¿puedo consumir en el local?",
       answer: "No, pero podés venir a retirar.",
     },
     {
       question: " ¿Puedo tomar coquita de vidrio ahí?",
-      answer: "Si..",
+      answer: "Si.",
     },
     {
       question: "¿La burger puede ser veggie?",
