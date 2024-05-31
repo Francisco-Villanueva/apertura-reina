@@ -13,19 +13,22 @@ export default function ProductCard({
 }: ProductCardInterface) {
   return (
     <article
-      className={`flex flex-col justify-center     gap-4  text-secondary  relative   ${
+      className={`flex flex-col justify-center  border border-accent/25 rounded-md    text-secondary  relative   ${
         readonly ? " w-full " : "  w-5/6 max-lg:w-full "
       }  `}
     >
       {/* {!readonly && (
         <div className="border h-2 aspect-square rounded-full absolute top-6 translate-x-[-50%] bg-secondary" />
       )} */}
-      <div className="flex justify-start  gap-2 max-md:flex-col">
-        <h5 className=" border px-4 rounded-sm  flex items-center font-semibold text-secondary bg-secondary/15 border-accent/25">
+      <div className="flex justify-start max-md:flex-col">
+        <h5
+          className="  px-4 rounded-t-md
+          flex items-center font-semibold text-secondary bg-secondary/15 "
+        >
           {product.date}
         </h5>
         {!product.isPrivate && (
-          <div className="  flex gap-2 p-2 rounded-sm md:items-center   text-sm text-secondary  max-md:flex-col">
+          <div className="  flex  px-2 my-2 rounded-sm md:items-center   text-sm text-secondary  max-md:flex-col">
             <span className="font-medium text-accent/40">
               Tickets Restantes
             </span>
@@ -49,7 +52,7 @@ export default function ProductCard({
       </div>
 
       <article
-        className={`flex justify-between gap-4 items-start bg-primary rounded-md p-4   max-md:p-2  border border-secondary/15 ${
+        className={`flex justify-between gap-4 items-start bg-primary rounded-b-md p-4   max-md:p-2   ${
           readonly ? "select-none" : ""
         }  `}
       >

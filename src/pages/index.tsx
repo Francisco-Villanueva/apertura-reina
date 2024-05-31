@@ -13,6 +13,7 @@ import {
   TimerIcon,
 } from "lucide-react";
 import { FrecuentsQuestions } from "@/components/Frecuents/FrecuentsQuestions";
+import { MenuCarousel } from "@/components/Carousel";
 
 interface NotificationType {
   isOpen: boolean;
@@ -61,7 +62,7 @@ export default function Home() {
         <div className=" h-full  ">
           <Landing />
           <FrecuentsQuestions />
-          <section className=" bg-foreground h-full pt-10 px-10 max-md:px-2   flex gap-4  justify-between ">
+          <section className=" bg-foreground h-full pt-10 px-10 max-md:px-2    flex gap-4  justify-between ">
             <div className="w-3/4   max-lg:w-full h-full flex flex-col gap-4      ">
               <h2 className="text-secondary font-medium text-2xl">
                 Eventos de apertura
@@ -116,6 +117,19 @@ export default function Home() {
                   </div>
                 </div>
               </div>
+            </div>
+          </section>
+          <section className="bg-black p-4 h-full  flex flex-col ">
+            <div>
+              <h2 className="font-semibold text-reina-yellow text-lg">Menú</h2>
+              <span className="text-accent/85">
+                Acá te dejamos nuestra carta para que puedas ver en detalle cada
+                una de neustras burgers
+              </span>
+            </div>
+
+            <div className="flex  justify-center items-center  flex-grow   ">
+              <MenuCarousel />
             </div>
           </section>
           <footer className="bg-accent-foreground  text-accent w-full  p-4">
