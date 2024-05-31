@@ -51,7 +51,6 @@ export default function Home() {
     }
   }, []);
 
-  console.log(notification.isOpen);
   return (
     <Provider>
       <main

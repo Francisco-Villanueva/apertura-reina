@@ -15,6 +15,7 @@ export const EventZodSchema = z.object({
   title: z.string(),
   subTitle: z.string(),
   price: z.number(),
+  isPrivate: z.boolean(),
   event: z.array(EventDetailsZodSchema),
   description: z.array(z.string()),
   availables: z.number(),

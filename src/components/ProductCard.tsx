@@ -24,24 +24,28 @@ export default function ProductCard({
         <h5 className=" border px-4 rounded-sm  flex items-center font-semibold text-secondary bg-secondary/15 border-accent/25">
           {product.date}
         </h5>
-        <div className="  flex gap-2 p-2 rounded-sm md:items-center   text-sm text-secondary  max-md:flex-col">
-          <span className="font-medium text-accent/40">Tickets Restantes</span>
-          <div className="flex items-center gap-4 max-md:gap-1 w-full max-md:justify-between">
-            {product.event.map(({ time, availables }) => (
-              <div
-                className="flex flex-col  border border-accent/20 rounded-sm max-md:w-full"
-                key={time}
-              >
-                <p className="text-secondary/50 text-sm max-md:text-xs px-2 py-1 text-center">
-                  {time}
-                </p>
-                <span className="bg-accent text-primary text-center font-semibold  ">
-                  {availables}
-                </span>
-              </div>
-            ))}
+        {!product.isPrivate && (
+          <div className="  flex gap-2 p-2 rounded-sm md:items-center   text-sm text-secondary  max-md:flex-col">
+            <span className="font-medium text-accent/40">
+              Tickets Restantes
+            </span>
+            <div className="flex items-center gap-4 max-md:gap-1 w-full max-md:justify-between">
+              {product.event.map(({ time, availables }) => (
+                <div
+                  className="flex flex-col  border border-accent/20 rounded-sm max-md:w-full"
+                  key={time}
+                >
+                  <p className="text-secondary/50 text-sm max-md:text-xs px-2 py-1 text-center">
+                    {time}
+                  </p>
+                  <span className="bg-accent text-primary text-center font-semibold  ">
+                    {availables}
+                  </span>
+                </div>
+              ))}
+            </div>
           </div>
-        </div>
+        )}
       </div>
 
       <article
@@ -59,11 +63,13 @@ export default function ProductCard({
               "flex max-md:flex-row-reverse max-md:justify-end gap-2 md:flex-col md:justify-between text-[25px] max-md:text-[15px]  "
             }
           >
-            <div className="flex items-center gap-1 text-secondary/75">
-              <h3 className="font-medium   text-reina-yellow">
-                ${formatNumber(product.price)}
-              </h3>
-            </div>
+            {!product.isPrivate && (
+              <div className="flex items-center gap-1 text-secondary/75">
+                <h3 className="font-medium   text-reina-yellow">
+                  ${formatNumber(product.price)}
+                </h3>
+              </div>
+            )}
             <h2 className="font-medium  ">{product.title}</h2>
           </header>
 
@@ -71,7 +77,7 @@ export default function ProductCard({
             {product.subTitle}
           </div>
 
-          {!readonly && (
+          {!readonly && !product.isPrivate && (
             <div className="w-1/3 max-md:w-full">
               <ClientDataAside product={product} />
             </div>
