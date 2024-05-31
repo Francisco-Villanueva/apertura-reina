@@ -19,6 +19,7 @@ export const EventZodSchema = z.object({
   event: z.array(EventDetailsZodSchema),
   description: z.array(z.string()),
   availables: z.number(),
+  createdAt: z.string(),
   Payments: z.array(PaymentZodSchema),
 });
 

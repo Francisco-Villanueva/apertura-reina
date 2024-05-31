@@ -8,9 +8,12 @@ export function EventList() {
   return (
     <div className="  max-h-[90%]  overflow-auto max-md:px-2 flex flex-col gap-4 ">
       {events.length > 0 ? (
-        events.map((product) => (
-          <ProductCard product={product} key={product.id} />
-        ))
+        events
+          .sort(
+            (a, b) =>
+              new Date(a.createdAt).getTime() - new Date(b.createdAt).getTime()
+          )
+          .map((product) => <ProductCard product={product} key={product.id} />)
       ) : (
         <Loader />
       )}
