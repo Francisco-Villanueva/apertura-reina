@@ -13,7 +13,7 @@ export function MenuCarousel() {
         {Array.from({ length: 2 }).map((_, index) => (
           <CarouselItem key={index}>
             <Image
-              src={`/menu${index + 1}.png`}
+              src={`/menu0${index + 1}.png`}
               alt="menu reina burguesa"
               width={700} // Nuevo ancho más pequeño
               height={80}
