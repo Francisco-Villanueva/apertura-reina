@@ -1,16 +1,24 @@
 import { eventStore } from "@/store";
 import Provider from "../Provider";
 import { PaymentsTable } from "@/components/Tables/PaymentsTable";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Event } from "@/types/event.types";
 import Image from "next/image";
 
 import { SelectEvents } from "@/components/Events/SelectEvents";
 import { formatNumber } from "@/utils/formatNumber";
+import { useRouter } from "next/router";
 
 export default function Page() {
   const { events } = eventStore();
-
+  const router = useRouter();
+  useEffect(() => {
+    const urlParams = new URLSearchParams(window.location.search);
+    const admin = urlParams.get("admin");
+    if (admin !== process.env.NEXT_PUBLIC_ADMIN) {
+      router.push("/");
+    }
+  });
   const [selectedEvent, setSelectedEvent] = useState<Event>();
   const handleSelectEvent = (eventId: Event["id"]) => {
     setSelectedEvent(events.find((e) => e.id === eventId));
