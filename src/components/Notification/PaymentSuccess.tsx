@@ -62,7 +62,7 @@ export function PaymenySuccess({ open = false }: { open: boolean }) {
         className="w-1/2 max-md:w-full p-0 bg-primary border-none  flex flex-col   font-montserrat "
         ref={ticketRef}
       >
-        <SheetHeader className=" h-[20%] flex justify-center items-center p-0 bg-green-500  ">
+        <SheetHeader className=" h-[20%] flex justify-center items-center p-0 bg-success  ">
           <SheetTitle className=" text-secondary text-2xl">
             Pago Confirmado
             <span className="">✅</span>
@@ -78,54 +78,55 @@ export function PaymenySuccess({ open = false }: { open: boolean }) {
             />
           </div>
           {paymentDetails ? (
-            <div className="flex flex-col w-full gap-8 ">
-              <section className="flex flex-col gap-2   w-full">
-                <h2 className="text-xl font-bold text-primary">
-                  {eventDetails?.title}
-                </h2>
-                <h2 className="text-md font- text-primary">
-                  📌 Fuerte Argentino 550, Bahía Blanca
-                </h2>
-
-                <div className="grid grid-cols-2 gap-2 w-2/3 p-4 mx-auto  mt-4">
-                  <article className="flex flex-col   items-start justify-start   w-full">
-                    <span>Fecha</span>
-                    <p className="text-primary font-semibold">
-                      {eventDetails?.date}
-                    </p>
-                  </article>
-                  <article className="flex flex-col   items-start justify-start  w-full flex-grow">
-                    <span>Horario</span>
-                    <p className="text-primary font-semibold">
-                      {paymentDetails.time}{" "}
-                    </p>
-                  </article>
-                  <article className="flex flex-col  items-start justify-start    w-full">
-                    <span>Ticket ID</span>
-                    <p className="text-primary font-semibold uppercase">
-                      #{paymentDetails.id?.slice(paymentDetails.id.length - 15)}
-                    </p>
-                  </article>
-                  <article className="flex flex-col  items-start justify-start  w-full flex-grow">
-                    <span>Nombre</span>
-                    <p className="text-primary font-semibold">
-                      {paymentDetails.name}
-                    </p>
-                  </article>
+            <div className="flex flex-col w-full gap-8 max-md:gap-0   h-full justify-around max-md:py-4 ">
+              <section className="flex flex-col gap-2    w-full">
+                <div className="flex flex-col  ">
+                  <h2 className="text-xl font-bold text-primary">
+                    {eventDetails?.title}
+                  </h2>
+                  <h2 className="text-md font- text-primary">
+                    📌 Fuerte Argentino 550, Bahía Blanca
+                  </h2>
                 </div>
               </section>
-              <section className="flex flex-col  gap-2  w-full   ">
+              <div className="grid grid-cols-2 gap-2 w-2/3 max-md:w-full p-4 mx-auto       mt-4 max-md:mt-0">
+                <article className="flex flex-col   items-start justify-start   w-full ">
+                  <span>Fecha</span>
+                  <p className="text-primary font-semibold">
+                    {eventDetails?.date}
+                  </p>
+                </article>
+                <article className="flex flex-col   items-start justify-start  w-full flex-grow ">
+                  <span>Horario</span>
+                  <p className="text-primary font-semibold">
+                    {paymentDetails.time}{" "}
+                  </p>
+                </article>
+                <article className="flex flex-col  items-start justify-start    w-full ">
+                  <span>Ticket ID</span>
+                  <p className="text-primary font-semibold uppercase">
+                    #{paymentDetails.id?.slice(paymentDetails.id.length - 15)}
+                  </p>
+                </article>
+                <article className="flex flex-col  items-start justify-start  w-full flex-grow ">
+                  <span>Nombre</span>
+                  <p className="text-primary font-semibold">
+                    {paymentDetails.name}
+                  </p>
+                </article>
+              </div>
+              <section className="flex flex-col  gap-2  w-full    ">
                 <h2 className="text-md font-semibold">Datos de la compra</h2>
                 <div className="flex flex-col gap-2  w-5/6 mx-auto">
                   <div className="flex justify-between ">
-                    <span>Cantidad de Entrada</span>
+                    <span>Cantidad de Entradas</span>
                     <span className="font-semibold">
                       {" "}
                       {paymentDetails.quantity}
                     </span>
                   </div>
                   <div className="flex justify-between ">
-                    <span>Valor de Entrada</span>
+                    <span>Valor ($)</span>
                     <span className="font-semibold">
                       {" "}
                       $ {paymentDetails.amount}
@@ -146,7 +147,7 @@ export function PaymenySuccess({ open = false }: { open: boolean }) {
                     </span>
                   </div>
                   <div className="flex justify-between">
-                    <span>Numero celular</span>
+                    <span>Celular</span>
                     <span className="font-semibold">
                       {" "}
                       {paymentDetails.phone}
@@ -155,17 +156,7 @@ export function PaymenySuccess({ open = false }: { open: boolean }) {
                   <div className="flex justify-between">
                     <span>Fecha de pago</span>
                     <span className="font-semibold">
-                      {paymentDetails.paymentDate
-                        ? new Date(
-                            paymentDetails.paymentDate
-                          ).toLocaleDateString()
-                        : ""}
-                    </span>
-                  </div>
-                  <div className="flex justify-between">
-                    <span>Metodo de pago</span>
-                    <span className="font-semibold">
-                      {paymentDetails.method || "-"}
+                      {paymentDetails.paymentDate}
                     </span>
                   </div>
                 </div>
@@ -175,7 +166,7 @@ export function PaymenySuccess({ open = false }: { open: boolean }) {
             <Loader />
           )}
           <div className="flex flex-col justify-center  items-center  flex-grow  ">
-            <h2 className="text-xl font-bold text-primary">Muchas Gracias !</h2>
+            <h2 className="text-xl font-bold text-primary">Muchas Gracias!</h2>
             <span className="opacity-75">reina burguesa ®️</span>
           </div>
         </SheetDescription>
