@@ -26,6 +26,8 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
+import { Button } from "../ui/button";
+
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[];
   data: TData[];
@@ -39,6 +41,12 @@ export function DataTable<TData, TValue>({
   const [columnFilters, setColumnFilters] = React.useState<ColumnFiltersState>(
     []
   );
+
+  const [dniFilter, setDniFilter] = React.useState<string>("");
+  const [timeFilter, setTimeFilter] = React.useState<string>("");
+  const [statusFilter, setStatusFilter] = React.useState<string>("");
+  const [asistConfirmed, setAsistConfirmed] = React.useState<boolean>();
+
   const table = useReactTable({
     data,
     columns,
@@ -51,22 +59,37 @@ export function DataTable<TData, TValue>({
     },
   });
 
+  const clearFilters = () => {
+    setColumnFilters([]);
+    setDniFilter("");
+    setTimeFilter("");
+    setStatusFilter("");
+    table.getColumn("dni")?.setFilterValue("");
+    table.getColumn("time")?.setFilterValue("");
+    table.getColumn("status")?.setFilterValue("");
+  };
+
   return (
     <div>
       <div className="flex items-center py-4 gap-2">
+        <Button onClick={clearFilters}>Clear</Button>
         <Input
           variant="secondary"
           placeholder="Buscar por DNI"
-          value={(table.getColumn("dni")?.getFilterValue() as string) ?? ""}
-          onChange={(event) =>
-            table.getColumn("dni")?.setFilterValue(event.target.value)
-          }
+          value={dniFilter}
+          onChange={(event) => {
+            const value = event.target.value;
+            setDniFilter(value);
+            table.getColumn("dni")?.setFilterValue(value);
+          }}
           className="max-w-sm border"
         />
         <Select
-          onValueChange={(timeValue) =>
-            table.getColumn("time")?.setFilterValue(timeValue)
-          }
+          value={timeFilter}
+          onValueChange={(timeValue) => {
+            setTimeFilter(timeValue);
+            table.getColumn("time")?.setFilterValue(timeValue);
+          }}
         >
           <SelectTrigger className="w-[350px]">
             <SelectValue placeholder="Horario" />
@@ -86,21 +109,47 @@ export function DataTable<TData, TValue>({
           </SelectContent>
         </Select>
         <Select
-          onValueChange={(timeValue) =>
-            table.getColumn("status")?.setFilterValue(timeValue)
-          }
+          value={statusFilter}
+          onValueChange={(statusValue) => {
+            setStatusFilter(statusValue);
+            table.getColumn("status")?.setFilterValue(statusValue);
+          }}
         >
           <SelectTrigger className="w-[350px]">
             <SelectValue placeholder="Estado del pago" />
           </SelectTrigger>
           <SelectContent>
-            {["Pending", "Approved", "Refused"].map((time) => (
+            {["Pending", "Approved", "Refused"].map((status) => (
               <SelectItem
-                value={time}
+                value={status}
                 className="flex cursor-pointer "
-                key={time}
+                key={status}
               >
-                <span className="font-semibold mr-1">🗓️ {time}</span>
+                <span className="font-semibold mr-1">🗓️ {status}</span>
+              </SelectItem>
+            ))}
+          </SelectContent>
+        </Select>
+        <Select
+          value={statusFilter}
+          onValueChange={(statusValue) => {
+            setAsistConfirmed(statusValue === "si");
+            table
+              .getColumn("confirmAsist")
+              ?.setFilterValue(statusValue === "si");
+          }}
+        >
+          <SelectTrigger className="w-[350px]">
+            <SelectValue placeholder="Estado del pago" />
+          </SelectTrigger>
+          <SelectContent>
+            {["si", "no"].map((asistValue, index) => (
+              <SelectItem
+                value={asistValue}
+                className="flex cursor-pointer "
+                key={index}
+              >
+                <span className="font-semibold mr-1">{asistValue}</span>
               </SelectItem>
             ))}
           </SelectContent>

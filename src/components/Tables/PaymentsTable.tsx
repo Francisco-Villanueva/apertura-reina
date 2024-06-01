@@ -3,20 +3,7 @@ import { ColumnDef } from "@tanstack/react-table";
 import { DataTable } from "./DataTable";
 import { paymentStore } from "@/store";
 import { Checkbox } from "@/components/ui/checkbox";
-import { Event } from "@/types/event.types";
 import { EventDetail } from "../Events";
-import { CheckIcon, MoreHorizontal, Trash, Trash2Icon } from "lucide-react";
-
-import { Button } from "@/components/ui/button";
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuLabel,
-  DropdownMenuSeparator,
-  DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu";
-import { PaymentServices } from "@/services";
 import { PaymentActions } from "./components";
 
 function PaymenStatus({ status }: { status: PaymentStatus }) {
@@ -43,13 +30,6 @@ function PriceFormat({ amount }: { amount: number }) {
   return <div className=" font-medium">{formatted}</div>;
 }
 
-const handleDeltePayment = (paymentId?: string) => {
-  PaymentServices.restorePayment(paymentId || "").then((res) => {
-    PaymentServices.deletePayment(paymentId || "").then(() => {
-      setTimeout(() => location.reload(), 500);
-    });
-  });
-};
 export const columns: ColumnDef<Payment>[] = [
   {
     id: "select",
