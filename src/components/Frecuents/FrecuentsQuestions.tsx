@@ -19,7 +19,7 @@ export function FrecuentsQuestions() {
     {
       question:
         "Y si no llego a comprar el ticket, ¿puedo consumir en el local?",
-      answer: "No, pero podés venir a retirar.",
+      answer: "No, pero vení a pedir acá, retirá y llevate un vermú de regalo.",
     },
     {
       question: " ¿Puedo tomar coquita de vidrio ahí?",
