@@ -62,7 +62,7 @@ export function PaymenySuccess({ open = false }: { open: boolean }) {
         className="w-1/2 max-md:w-full p-0 bg-primary border-none  flex flex-col   font-montserrat "
         ref={ticketRef}
       >
-        <SheetHeader className=" h-[20%] flex justify-center items-center p-0 bg-success  ">
+        <SheetHeader className=" h-[20%] flex justify-center items-center p-0 bg-green-500  ">
           <SheetTitle className=" text-secondary text-2xl">
             Pago Confirmado
             <span className="">✅</span>
