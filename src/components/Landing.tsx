@@ -31,7 +31,7 @@ export default function Landing() {
               <br />
 
               <span>
-                El local cuenta con 24 lugares, por eso dividimos el miércoles y
+                El local cuenta con 20 lugares, por eso dividimos el miércoles y
                 jueves en tres franjas horarias, elegí la que más te guste y
                 sacá tu ticket. El mismo incluye una burger doble, papas y
                 bebida ¿Puedo elegir? Si, todo es a elección.
