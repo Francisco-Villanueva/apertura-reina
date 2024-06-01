@@ -85,7 +85,7 @@ export function PaymenySuccess({ open = false }: { open: boolean }) {
                     {eventDetails?.title}
                   </h2>
                   <h2 className="text-md font- text-primary">
-                    📌 Fuerte Argentino 550, Bahía Blanca
+                    📌 Fuerte Argentino 285, Bahía Blanca
                   </h2>
                 </div>
               </section>
