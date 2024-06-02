@@ -97,6 +97,10 @@ export const columns: ColumnDef<Payment>[] = [
     header: "DNI",
   },
   {
+    accessorKey: "id",
+    header: "--",
+  },
+  {
     accessorKey: "amount",
     header: "Amount",
     cell: ({ getValue }) => <PriceFormat amount={getValue<number>()} />,

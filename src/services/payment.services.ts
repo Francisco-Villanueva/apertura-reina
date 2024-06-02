@@ -21,6 +21,12 @@ export class PaymentServices {
     });
     return response.data;
   }
+  static async returnPayment(paymentId: string) {
+    const response = await axios.post(`${API_URL}/payment/aprovePayment`, {
+      paymentId,
+    });
+    return response.data;
+  }
   static async deletePayment(paymentId: string) {
     const response = await axios.post(`${API_URL}/payment/delete`, {
       id: paymentId,

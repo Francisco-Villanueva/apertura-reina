@@ -41,6 +41,12 @@ export function PaymentActions({ payment }: PaymentActionsProps) {
     });
   };
 
+  const handleReturnPayment = () => {
+    PaymentServices.returnPayment(payment.id!).then(() => {
+      setTimeout(() => location.reload(), 500);
+    });
+  };
+
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
@@ -66,6 +72,12 @@ export function PaymentActions({ payment }: PaymentActionsProps) {
           onClick={handleDeltePayment}
         >
           <Trash2Icon className="w-4 text-error" /> Borrar
+        </DropdownMenuItem>
+        <DropdownMenuItem
+          className="font-semibold flex gap-1 items-center cursor-pointer"
+          onClick={handleReturnPayment}
+        >
+          <Trash2Icon className="w-4 text-reina-yellow" /> Aprobar ✅
         </DropdownMenuItem>
       </DropdownMenuContent>
     </DropdownMenu>
