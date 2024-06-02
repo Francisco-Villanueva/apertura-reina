@@ -42,6 +42,7 @@ export function DataTable<TData, TValue>({
     []
   );
 
+  const [nameFilter, setNameFilter] = React.useState<string>("");
   const [dniFilter, setDniFilter] = React.useState<string>("");
   const [timeFilter, setTimeFilter] = React.useState<string>("");
   const [statusFilter, setStatusFilter] = React.useState<string>("");
@@ -62,6 +63,7 @@ export function DataTable<TData, TValue>({
   const clearFilters = () => {
     setColumnFilters([]);
     setDniFilter("");
+    setNameFilter("");
     setTimeFilter("");
     setStatusFilter("");
     table.getColumn("dni")?.setFilterValue("");
@@ -71,89 +73,107 @@ export function DataTable<TData, TValue>({
 
   return (
     <div>
-      <div className="flex items-center py-4 gap-2">
+      <div className="flex items-center  py-4 justify-between">
         <Button onClick={clearFilters}>Clear</Button>
-        <Input
-          variant="secondary"
-          placeholder="Buscar por DNI"
-          value={dniFilter}
-          onChange={(event) => {
-            const value = event.target.value;
-            setDniFilter(value);
-            table.getColumn("dni")?.setFilterValue(value);
-          }}
-          className="max-w-sm border"
-        />
-        <Select
-          value={timeFilter}
-          onValueChange={(timeValue) => {
-            setTimeFilter(timeValue);
-            table.getColumn("time")?.setFilterValue(timeValue);
-          }}
-        >
-          <SelectTrigger className="w-[350px]">
-            <SelectValue placeholder="Horario" />
-          </SelectTrigger>
-          <SelectContent>
-            {[" ", "20:30 - 21:30", "21:30 - 22:30", "22:30 - 23:30"].map(
-              (time) => (
+        <div className="flex flex-col w-1/3">
+          <Input
+            variant="secondary"
+            placeholder="Nombre & Apellido"
+            value={nameFilter}
+            onChange={(event) => {
+              const value = event.target.value;
+              setNameFilter(value);
+              table.getColumn("name")?.setFilterValue(value);
+            }}
+            className=" border"
+          />
+          <Input
+            variant="secondary"
+            placeholder="Buscar por DNI"
+            value={dniFilter}
+            onChange={(event) => {
+              const value = event.target.value;
+              setDniFilter(value);
+              table.getColumn("dni")?.setFilterValue(value);
+            }}
+            className=" border"
+          />
+        </div>
+
+        <div className="flex flex-col w-1/3">
+          <Select
+            value={timeFilter}
+            onValueChange={(timeValue) => {
+              setTimeFilter(timeValue);
+              table.getColumn("time")?.setFilterValue(timeValue);
+            }}
+          >
+            <SelectTrigger className="w-[]">
+              <SelectValue placeholder="Horario" />
+            </SelectTrigger>
+            <SelectContent>
+              {[" ", "20:30 - 21:30", "21:30 - 22:30", "22:30 - 23:30"].map(
+                (time) => (
+                  <SelectItem
+                    value={time}
+                    className="flex cursor-pointer "
+                    key={time}
+                  >
+                    <span className="font-semibold mr-1">🗓️ {time}</span>
+                  </SelectItem>
+                )
+              )}
+            </SelectContent>
+          </Select>
+          <Select
+            value={statusFilter}
+            onValueChange={(statusValue) => {
+              setStatusFilter(statusValue);
+              table.getColumn("status")?.setFilterValue(statusValue);
+            }}
+          >
+            <SelectTrigger className="w-[]">
+              <SelectValue placeholder="Estado del pago" />
+            </SelectTrigger>
+            <SelectContent>
+              {["Pending", "Approved", "Refused"].map((status) => (
                 <SelectItem
-                  value={time}
+                  value={status}
                   className="flex cursor-pointer "
-                  key={time}
+                  key={status}
                 >
-                  <span className="font-semibold mr-1">🗓️ {time}</span>
+                  <span className="font-semibold mr-1">🗓️ {status}</span>
                 </SelectItem>
-              )
-            )}
-          </SelectContent>
-        </Select>
-        <Select
-          value={statusFilter}
-          onValueChange={(statusValue) => {
-            setStatusFilter(statusValue);
-            table.getColumn("status")?.setFilterValue(statusValue);
-          }}
-        >
-          <SelectTrigger className="w-[350px]">
-            <SelectValue placeholder="Estado del pago" />
-          </SelectTrigger>
-          <SelectContent>
-            {["Pending", "Approved", "Refused"].map((status) => (
-              <SelectItem
-                value={status}
-                className="flex cursor-pointer "
-                key={status}
-              >
-                <span className="font-semibold mr-1">🗓️ {status}</span>
-              </SelectItem>
-            ))}
-          </SelectContent>
-        </Select>
-        <Select
-          value={statusFilter}
-          onValueChange={(statusValue) => {
-            setAsistConfirmed(statusValue === "si");
-            table
-              .getColumn("confirmAsist")
-              ?.setFilterValue(statusValue === "si");
-          }}
-        >
-          <SelectTrigger className="w-[350px]">
-            <SelectValue placeholder="Estado del pago" />
-          </SelectTrigger>
-          <SelectContent>
-            {["si", "no"].map((asistValue, index) => (
-              <SelectItem
-                value={asistValue}
-                className="flex cursor-pointer "
-                key={index}
-              >
-                <span className="font-semibold mr-1">{asistValue}</span>
-              </SelectItem>
-            ))}
-          </SelectContent>
-        </Select>
+              ))}
+            </SelectContent>
+          </Select>
+        </div>
+        <div className="w-1/6">
+          <Select
+            value={statusFilter}
+            onValueChange={(statusValue) => {
+              setAsistConfirmed(statusValue === "si");
+              table
+                .getColumn("confirmAsist")
+                ?.setFilterValue(statusValue === "si");
+            }}
+          >
+            <SelectTrigger className="w-full">
+              <SelectValue placeholder="Asisitencia" />
+            </SelectTrigger>
+            <SelectContent>
+              {["si", "no"].map((asistValue, index) => (
+                <SelectItem
+                  value={asistValue}
+                  className="flex cursor-pointer "
+                  key={index}
+                >
+                  <span className="font-semibold mr-1">{asistValue}</span>
+                </SelectItem>
+              ))}
+            </SelectContent>
+          </Select>
+        </div>
       </div>
       <div className="rounded-md border bg-[rgba(230,230,230)]">
         <Table>
