@@ -4,7 +4,7 @@ import { DataTable } from "./DataTable";
 import { paymentStore } from "@/store";
 import { Checkbox } from "@/components/ui/checkbox";
 import { EventDetail } from "../Events";
-import { PaymentActions } from "./components";
+import { ContactButton, PaymentActions } from "./components";
 
 function PaymenStatus({ status }: { status: PaymentStatus }) {
   const style: Record<PaymentStatus, string> = {
@@ -84,6 +84,11 @@ export const columns: ColumnDef<Payment>[] = [
     header: "Email",
   },
   {
+    accessorKey: "phone",
+    header: "Celular",
+    cell: ({ getValue }) => <ContactButton phoneNumber={getValue<string>()} />,
+  },
+  {
     accessorKey: "name",
     header: "Nombre",
   },
@@ -133,6 +138,23 @@ export function PaymentsTable({
   const { allPayments } = paymentStore();
   return (
     <div className=" font-montserrat ">
+      <div className="flex  gap-4 text-secondary text-sm font-semibold">
+        <span className="flex items-center gap-2 border rounded-sm border-accent/20 px-4">
+          Approved:{" "}
+          {
+            allPayments.filter((payment) => payment.status === "Approved")
+              .length
+          }
+        </span>
+        <span className="flex items-center gap-2 border rounded-sm border-accent/20 px-4">
+          Pending:{" "}
+          {allPayments.filter((payment) => payment.status === "Pending").length}
+        </span>
+        <span className="flex items-center gap-2 border rounded-sm border-accent/20 px-4">
+          Refused:{" "}
+          {allPayments.filter((payment) => payment.status === "Refused").length}
+        </span>
+      </div>
       <DataTable
         columns={columns}
         data={selectedPayments ? selectedPayments : allPayments}
