@@ -1,6 +1,6 @@
 import { eventStore } from "@/store";
 import ProductCard from "../ProductCard";
-import { Loader } from "lucide-react";
+import Image from "next/image";
 
 export function EventList() {
   const { events } = eventStore();
@@ -18,7 +18,17 @@ export function EventList() {
           )
           .map((product) => <ProductCard product={product} key={product.id} />)
       ) : (
-        <Loader />
+        <div className="  text-white flex flex-col items-center justify-center h-96 animate-pulse ">
+          <div className="h-24 w-24 relative">
+            <Image
+              src="/reina/RBlanca.png"
+              alt="reina burguesa logo blanco"
+              fill
+              objectFit="cover"
+            />
+          </div>
+          <span>Cargando ...</span>
+        </div>
       )}
     </div>
   );
